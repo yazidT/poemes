@@ -1,7 +1,7 @@
 <?php
+require_once "../controller/fonctions.php";
 
 require "header.php";
-require_once "../controller/fonctions.php";
 
 $stmt = $pdo->prepare("SELECT * FROM postes WHERE cat_id = ?");
 $stmt->execute(array(2));
