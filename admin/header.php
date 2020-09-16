@@ -1,10 +1,70 @@
 <?php
+
+use App\Categorie;
+
 session_start();
 
 require_once '../src/Post.php';
 require_once '../src/Categorie.php';
 require_once '../src/User.php';
 require_once '../src/Connection.php';
+
+Connection::getSession();
+
+$pdo = Connection::getPDO();
+
+
+$post = new Post();
+$categorie = new Categorie();
+$user = new User();
+
+/**
+ * Posts Validations
+ */
+if(isset($_GET['vpost']))
+{
+    $post->validate($pdo, $_GET['vpost']);
+    header("location: posts.php");
+}
+if(isset($_GET['dpost']))
+{
+    $post->deletePost($pdo, $_GET['dpost']);
+    header("location: posts.php");
+
+}
+
+
+/**
+ * Categories Validations
+ */
+
+if(isset($_GET['dcat']))
+{
+    $categorie->deleteCategorie($pdo, $_GET['dcat']);
+    header("categories.php");
+}
+if(isset($_GET['addcat']))
+{
+    $categorie->addCategorie($pdo, $_GET['addcat']);
+    header("categories.php");
+}
+
+// Nouvelle Catégorie
+
+
+
+/**
+ * Categories Validations
+ */
+
+if(isset($_GET['duser']))
+{
+    $user->deleteUser($pdo, $_GET['duser']);
+    header("users.php");
+}
+
+
+
 ?>
 
 <!DOCTYPE html>

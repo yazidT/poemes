@@ -9,5 +9,16 @@ class Connection
         
     }
 
+
+
+    public static function getSession()
+    {
+        if(!isset($_SESSION['user_name']))
+        {
+            header('location: index.php');
+            exit;
+        }
+    }
+
 }
 

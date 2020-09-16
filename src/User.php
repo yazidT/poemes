@@ -1,7 +1,5 @@
 <?php
 
-namespace App;
-
 
 class User
 {
@@ -61,6 +59,24 @@ class User
         $this->deleted = $deleted;
     } 
 
+    /**
+     * Functions 
+     */
+
+    public function getAll( $pdo)
+    {
+        $stmt = $pdo->prepare("SELECT * FROM utilisateurs WHERE deleted = 0 ORDER BY id DESC");
+        $stmt->execute();
+        $posts = $stmt->fetchAll();
+        return $posts;
+    }
+
+    
+    public function deleteUser( $pdo, $id)
+    {
+        $stmt = $pdo->prepare("UPDATE utilisateurs SET deleted = 1 WHERE id = ?  ");
+        $stmt->execute(array($id));
+    }
 
 
 }

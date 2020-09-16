@@ -87,11 +87,40 @@ class Post
 
     public function getAll( $pdo)
     {
-        $stmt = $pdo->prepare("SELECT * FROM postes ORDER BY id ASC");
+        $stmt = $pdo->prepare("SELECT * FROM postes WHERE deleted = 0 ORDER BY id ASC");
+        $stmt->execute();
+        $posts = $stmt->fetchAll();
+        return $posts;
+    }
+
+    public function getAllNew( $pdo)
+    {
+        $stmt = $pdo->prepare("SELECT * FROM postes WHERE status = 0 AND deleted = 0 ORDER BY id DESC");
+        $stmt->execute();
+        $posts = $stmt->fetchAll();
+        return $posts;
+    }
+
+    public function getAllValidated( $pdo)
+    {
+        $stmt = $pdo->prepare("SELECT * FROM postes WHERE status = 1 AND deleted = 0  ORDER BY id DESC");
         $stmt->execute(array(2));
         $posts = $stmt->fetchAll();
         return $posts;
     }
+
+    public function validate( $pdo, $id)
+    {
+        $stmt = $pdo->prepare("UPDATE postes SET status = 1 WHERE id = ?  ");
+        $stmt->execute(array($id));
+    }
+
+    public function deletePost( $pdo, $id)
+    {
+        $stmt = $pdo->prepare("UPDATE postes SET deleted = 1 WHERE id = ?  ");
+        $stmt->execute(array($id));
+    }
+
 
 
 }
