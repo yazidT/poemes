@@ -7,9 +7,9 @@ session_start();
 require_once '../src/Post.php';
 require_once '../src/Categorie.php';
 require_once '../src/User.php';
-require_once '../src/Connection.php';
+require_once '../src/Connexion.php';
 
-Connection::getSession();
+Connection::getSessionAdmin();
 
 $pdo = Connection::getPDO();
 
@@ -17,6 +17,8 @@ $pdo = Connection::getPDO();
 $post = new Post();
 $categorie = new Categorie();
 $user = new User();
+
+$modifierCategorie = false;
 
 /**
  * Posts Validations
@@ -38,25 +40,43 @@ if(isset($_GET['dpost']))
  * Categories Validations
  */
 
+// Supprimer une Catégorie
 if(isset($_GET['dcat']))
 {
     $categorie->deleteCategorie($pdo, $_GET['dcat']);
     header("categories.php");
 }
+// Nouvelle Catégorie
 if(isset($_GET['addcat']))
 {
     $categorie->addCategorie($pdo, $_GET['addcat']);
     header("categories.php");
 }
+// Editer une Catégorie
+if(isset($_GET['editcat']))
+{
+    $id = $_GET['editcat'];
+    $modifierCategorie = true;
+    $categorieUp = new Categorie;
 
-// Nouvelle Catégorie
+    $categorieUp = $categorie->findCategorie($pdo, $id);
+
+}
+//Modifier une catégorie
+if(isset($_GET['mcat']))
+{
+    $categorie->modifyCategorie($pdo, $_GET['mcat'], $_GET['id']);
+    header("categories.php");
+}
 
 
 
 /**
- * Categories Validations
+ * Users Validations
  */
 
+
+//Supprimer un utilisateur
 if(isset($_GET['duser']))
 {
     $user->deleteUser($pdo, $_GET['duser']);
@@ -108,7 +128,7 @@ if(isset($_GET['duser']))
                         <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                             <img src="assets/images/users/avatar-4.jpg" alt="user-image" class="rounded-circle">
                             <span class="pro-user-name ml-1">
-                               Wellcome <?= $_SESSION['user_name'] ?> <i class="mdi mdi-chevron-down"></i> 
+                               Wellcome <?= $_SESSION['admin_name'] ?> <i class="mdi mdi-chevron-down"></i> 
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right profile-dropdown ">

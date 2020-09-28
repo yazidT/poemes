@@ -11,14 +11,25 @@ class Connection
 
 
 
-    public static function getSession()
+    public static function getSessionAdmin()
     {
-        if(!isset($_SESSION['user_name']))
+        if(!isset($_SESSION['admin_name']))
         {
             header('location: index.php');
             exit;
         }
     }
+
+
+    public static function getSessionUser()
+    {
+        if(!isset($_SESSION['user_id']))
+        {
+            header('location: ../vue/login.php');
+            exit;
+        }
+    }
+
 
 }
 

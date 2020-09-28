@@ -1,3 +1,11 @@
+<?php
+require_once "../src/Connexion.php";
+require_once "../src/User.php";
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -5,14 +13,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proverbes et citations</title>
  
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/png" href="img/logo.png">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="image/png" href="../img/logo.png">
 </head>
 <body>
     <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="index.php"> <img src="img/logo.png" alt="Logo du site" id="logo"> Poèmes et citations</a>
+  <a class="navbar-brand" href="index.php"> <img src="../img/logo.png" alt="Logo du site" id="logo"> Poèmes et citations</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"> se connecter </span>
   </button>
@@ -33,10 +41,7 @@
       </li>
 
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="entrez un mot clé">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Rcherche</button>
-    </form>
+    <a href="login.php">Connrexion / créer un compte</a>
 
 
   </div>

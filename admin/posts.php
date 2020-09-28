@@ -67,8 +67,8 @@ $postsValides = $post->getAllValidated($pdo);
                                         <?php foreach ($postsEnAttente as $post ):?>    
                                         <tr>
                                             <td><?= $post['id'] ?></td>
-                                            <td><?= $post['uti_id'] ?></td>
-                                            <td><?= $post['cat_id'] ?></td>
+                                            <td><?= $user->findUserName($pdo,$post['uti_id']) ?></td>
+                                            <td><?= $categorie->findCategoryName($pdo,$post['cat_id']) ?></td>
                                             <td><?= $post['contenu'] ?></td>
                                             <td><?= $post['date'] ?></td>
                                             <td><?= $post['pays'] ?></td>
@@ -105,8 +105,8 @@ $postsValides = $post->getAllValidated($pdo);
                                         <?php foreach ($postsValides as $post ):?>    
                                         <tr>
                                             <td><?= $post['id'] ?></td>
-                                            <td><?= $post['uti_id'] ?></td>
-                                            <td><?= $post['cat_id'] ?></td>
+                                            <td><?= $user->findUserName($pdo,$post['uti_id'])?></td>
+                                            <td><?= $categorie->findCategoryName($pdo,$post['cat_id'])  ?></td>
                                             <td><?= $post['contenu'] ?></td>
                                             <td><?= $post['date'] ?></td>
                                             <td><?= $post['pays'] ?></td>

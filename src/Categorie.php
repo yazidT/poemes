@@ -36,13 +36,21 @@ class Categorie
     /**
      * Functions 
      */
+    public function findCategoryName( $pdo, $id)
+    {
+        $stmt = $pdo->prepare("SELECT nom FROM categories WHERE id = ?  ");
+        $stmt->execute(array($id));
+        $name = $stmt->fetch();
+        return $name['nom'];
+    }
+
 
     public function getAll( $pdo)
     {
         $stmt = $pdo->prepare("SELECT * FROM categories WHERE deleted = 0 ORDER BY id ASC");
         $stmt->execute();
-        $posts = $stmt->fetchAll();
-        return $posts;
+        $cats = $stmt->fetchAll();
+        return $cats;
     }
 
     
@@ -59,6 +67,18 @@ class Categorie
         $stmt->execute(array($value,0));
     }
 
+    public function findCategorie( $pdo, $id)
+    {
+        $stmt = $pdo->prepare("SELECT * FROM categories WHERE id = ?");
+        $stmt->execute(array($id));
+        $cat = $stmt->fetch();
+        return $cat;
+    }
 
+    public function modifyCategorie( $pdo, $value, $id)
+    {
+        $stmt = $pdo->prepare("UPDATE categories SET nom = ? WHERE id = ?  ");
+        $stmt->execute(array($value, $id));
+    }
 
 }

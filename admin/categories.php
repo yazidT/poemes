@@ -56,7 +56,10 @@ $categories = $categorie->getAll($pdo);
                                         <tr>
                                             <td><?= $categorie['id'] ?></td>
                                             <td><?= $categorie['nom'] ?></td>
-                                            <td><a title="Supprimer" href="?dcat=<?= $categorie['id'] ?>" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger"><i class="mdi mdi-trash-can-outline "></i></a></td>
+                                            <td>
+                                                <a title="Supprimer" href="?dcat=<?= $categorie['id'] ?>" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger"><i class="mdi mdi-trash-can-outline "></i></a>
+                                                <a title="Modifier" href="?editcat=<?= $categorie['id'] ?>" class="btn btn-primary"><i class="mdi mdi-trash-can-outline "></i>Modifier</a>
+                                            </td>
                                         </tr>
                                         <?php endforeach ?>    
 
@@ -73,6 +76,26 @@ $categories = $categorie->getAll($pdo);
                         <div class="row">
                             <div class="col-12">
                                 <div class="card-box">
+
+                                <?php if( isset($id) ): ?>
+                                    <h4 class="header-title">Modifier une catégorie</h4>
+                                    <form  class="form-horizontal">
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label" for="simpleinput">Modifier </label>
+                                            <div class="col-sm-10">
+                                                <input name="mcat" type="text" class="form-control" id="simpleinput" value="<?= $categorieUp['nom'] ?>">
+                                                <input name="id" type="hidden" value="<?= $categorieUp['id'] ?>">
+                                            </div>
+                                        </div>
+                                        
+                                        <button  type="submit" class="btn btn-primary">Modifier</button>
+
+                                    </form>                
+
+
+                                <?php else: ?>
+
+
                                     <h4 class="header-title">Ajout d'une nouvelle catégorie</h4>
                                     <form  class="form-horizontal">
                                         <div class="form-group row">
@@ -85,7 +108,9 @@ $categories = $categorie->getAll($pdo);
                                         <button  type="submit" class="btn btn-primary">Ajouter </button>
 
                                     </form>                
-                               </div> <!-- container -->
+
+                                <?php endif ?>    
+                                </div> <!-- container -->
 
                             </div> <!-- content -->                    
                         </div> <!-- container -->

@@ -9,7 +9,7 @@ class User
     private $pseudo;
     private $email;
     private $passe;
-    private $deleted;
+    private $deleted =0;
 
 
     public function getID(){
@@ -62,6 +62,42 @@ class User
     /**
      * Functions 
      */
+    public function createUser($pdo)
+    {
+        $stmt = $pdo->prepare("INSERT INTO utilisateurs (nom, prenom, pseudo, email, passe) VALUES (?,?,?,?,?)");
+        $stmt->execute(array($this->nom, $this->prenom, $this->pseudo, $this->email, $this->passe));
+    }
+
+
+    public function getUser($pdo, $email)
+    {
+        $stmt = $pdo->prepare("SELECT * FROM utilisateurs WHERE email = ?  ");
+        $stmt->execute(array($email));
+        $user = $stmt->fetch();
+        return $user;
+    }
+
+    public function checkEmail( $pdo, $email)
+    {
+        $stmt = $pdo->prepare("SELECT * FROM utilisateurs WHERE email = ?  ");
+        $stmt->execute(array($email));
+
+        $user = $stmt->fetch();
+        return $user;
+    }
+
+
+    public function findUserName( $pdo, $id)
+    {
+        $stmt = $pdo->prepare("SELECT pseudo FROM utilisateurs WHERE id = ?  ");
+        $stmt->execute(array($id));
+
+        $name = $stmt->fetch();
+        return $name['pseudo'];
+    }
+
+
+
 
     public function getAll( $pdo)
     {
