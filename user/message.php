@@ -15,13 +15,9 @@ var_dump($page);
 
 <div class="row">
     
-    
 <?php
 require 'leftSide.php';
 ?>
-
-
-
 <div class="col-md-9 pl-0">
     <div class="jumbotron p-2">
         <h2>Mon compte : <?= $cUser['pseudo']?></h2>

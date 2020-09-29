@@ -2,6 +2,11 @@
 
 
 require "header.php";
+session_start();
+
+
+if(isset($_SESSION['user_email'])) header('location: ../user/index.php');
+
 $connexionFailed = false;
 $formFailed = false;
 $hidden = '1';
@@ -10,16 +15,17 @@ $pdo = Connection::getPDO();
 $user = new User();
 
 
+
 // connexion to an existant account
 if(isset($_POST['email']) )
 {
     $email = $_POST['email'];
-    $user = $user->getUser($pdo, $email);
-    if($user){
-        if( $user['email'] == $_POST['email'] && $user['email'] == $_POST['email']  )
+    $cUser = $user->getUser($pdo, $email);
+    if($cUser){
+        if( $cUser['email'] == $_POST['email'] && $cUser['email'] == $_POST['email']  )
         {
             session_start();
-            $_SESSION['user_email']= $user['email'];
+            $_SESSION['user_email']= $cUser['email'];
             header('location: ../user/index.php');
         }
     }else 

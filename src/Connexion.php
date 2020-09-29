@@ -23,7 +23,7 @@ class Connection
 
     public static function getSessionUser()
     {
-        if(!isset($_SESSION['user_id']))
+        if(!isset($_SESSION['user_email']))
         {
             header('location: ../vue/login.php');
             exit;

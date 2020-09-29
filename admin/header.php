@@ -1,6 +1,5 @@
 <?php
 
-use App\Categorie;
 
 session_start();
 

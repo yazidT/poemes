@@ -2,7 +2,7 @@
 
 
 
-class Categorie
+class Type
 {
     private $id;
     private $nom;
@@ -35,9 +35,9 @@ class Categorie
     /**
      * Functions 
      */
-    public function findCategoryName( $pdo, $id)
+    public function findTypeName( $pdo, $id)
     {
-        $stmt = $pdo->prepare("SELECT nom FROM categories WHERE id = ?  ");
+        $stmt = $pdo->prepare("SELECT nom FROM types WHERE id = ?  ");
         $stmt->execute(array($id));
         $name = $stmt->fetch();
         return $name['nom'];
@@ -46,37 +46,37 @@ class Categorie
 
     public function getAll( $pdo)
     {
-        $stmt = $pdo->prepare("SELECT * FROM categories WHERE deleted = 0 ORDER BY id ASC");
+        $stmt = $pdo->prepare("SELECT * FROM types WHERE deleted = 0 ORDER BY id ASC");
         $stmt->execute();
-        $cats = $stmt->fetchAll();
-        return $cats;
+        $types = $stmt->fetchAll();
+        return $types;
     }
 
     
-    public function deleteCategorie( $pdo, $id)
+    public function deleteType( $pdo, $id)
     {
-        $stmt = $pdo->prepare("UPDATE categories SET deleted = 1 WHERE id = ?  ");
+        $stmt = $pdo->prepare("UPDATE types SET deleted = 1 WHERE id = ?  ");
         $stmt->execute(array($id));
     }
 
 
-    public function addCategorie( $pdo, $value)
+    public function addType( $pdo, $value)
     {
-        $stmt = $pdo->prepare("INSERT INTO `categories`( `nom`, `deleted`) VALUES (?,?) ");
+        $stmt = $pdo->prepare("INSERT INTO types ( `nom`, `deleted`) VALUES (?,?) ");
         $stmt->execute(array($value,0));
     }
 
     public function findCategorie( $pdo, $id)
     {
-        $stmt = $pdo->prepare("SELECT * FROM categories WHERE id = ?");
+        $stmt = $pdo->prepare("SELECT * FROM types WHERE id = ?");
         $stmt->execute(array($id));
-        $cat = $stmt->fetch();
-        return $cat;
+        $type = $stmt->fetch();
+        return $type;
     }
 
-    public function modifyCategorie( $pdo, $value, $id)
+    public function modifyType( $pdo, $value, $id)
     {
-        $stmt = $pdo->prepare("UPDATE categories SET nom = ? WHERE id = ?  ");
+        $stmt = $pdo->prepare("UPDATE types SET nom = ? WHERE id = ?  ");
         $stmt->execute(array($value, $id));
     }
 

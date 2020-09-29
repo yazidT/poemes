@@ -84,7 +84,22 @@ class Post
     /**
      * Functions 
      */
-
+    public function findPostsById($pdo, $id)
+    {
+        $stmt = $pdo->prepare("SELECT * FROM postes WHERE deleted = 0 AND uti_id = ? ORDER BY id DESC");
+        $stmt->execute(array($id));
+        $posts = $stmt->fetchAll();
+        return $posts;
+    }
+    
+    public function findPostsByTypeID($pdo, $userId, $typeId)
+    {
+        $stmt = $pdo->prepare("SELECT * FROM postes WHERE deleted = 0 AND uti_id = ? AND type = ? ORDER BY id DESC");
+        $stmt->execute(array($userId, $typeId));
+        $posts = $stmt->fetchAll();
+        return $posts;    
+    }
+    
     public function getAll( $pdo)
     {
         $stmt = $pdo->prepare("SELECT * FROM postes WHERE deleted = 0 ORDER BY id ASC");

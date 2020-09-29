@@ -1,6 +1,27 @@
 <?php
-require_once "../src/Connexion.php";
-require_once "../src/User.php";
+
+
+
+
+session_start();
+
+require_once '../src/Post.php';
+require_once '../src/Type.php';
+require_once '../src/Categorie.php';
+require_once '../src/User.php';
+require_once '../src/Connexion.php';
+
+Connection::getSessionUser();
+
+$pdo = Connection::getPDO();
+
+
+$post = new Post();
+$type = new Type();
+$categorie = new Categorie();
+$user = new User();
+
+$cUser = $user->getUser($pdo, $_SESSION['user_email']);
 
 
 ?>
@@ -15,11 +36,13 @@ require_once "../src/User.php";
  
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+
     <link rel="icon" type="image/png" href="../img/logo.png">
+
     	<!--  Fonts  --> 
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 	
-</head>
+  </head>
 <body>
     <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -31,7 +54,7 @@ require_once "../src/User.php";
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="index.php">Page d'acceuil </a>
+        <a class="nav-link" href="../vue/index.php">Page d'acceuil </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="poemes.php">Poèmes</a>
@@ -44,7 +67,7 @@ require_once "../src/User.php";
       </li>
 
     </ul>
-    <a href="login.php" class="btn btn-outline-success">Connrexion / créer un compte</a>
+    <a href="logout.php" class="btn btn-outline-warning">Se deconnecter</a>
 
 
   </div>
